@@ -1,0 +1,142 @@
+{% extends "base_header.html" %}
+
+
+
+{% block body %}
+<html style="font-size: 16px;">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    {% block title %}
+        <title>Главная</title>
+    {% endblock %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/Главная.css' %}" media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
+
+    <link id="u-theme-google-font" rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Главная">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="/ad/static">
+    <meta data-intl-tel-input-cdn-path="intlTelInput/">
+</head>
+<body class="u-body u-xl-mode" data-lang="ru">
+
+<section class="u-clearfix u-section-1" id="sec-3c25">
+    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <div class="u-table u-table-responsive u-table-1">
+            <table class="u-table-entity">
+                <colgroup>
+                    <col width="16.2%">
+                    <col width="51.4%">
+                    <col width="19.9%">
+                    <col width="12.5%">
+                </colgroup>
+                <tbody class="u-table-body">
+                <form id="search" method="get" action="/ad/">
+                <tr style="height: 29px;">
+                    <td class="u-border-2 u-border-palette-4-base u-table-cell u-table-cell-1">
+                        <select class="search-bar-cell" name="type">
+                        <option value="" >Категория...</option>
+                            {% for copy in type_list %}
+                            <option value="{{ copy.name }}">{{ copy.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td class="u-border-2 u-border-palette-4-base u-table-cell"><input name="search" class="search-bar-cell" type="text" placeholder="Поиск..."></td>
+                    <td class="u-border-2 u-border-palette-4-base u-table-cell">
+                        <select class="search-bar-cell" name="city">
+                            <option value="" >Город...</option>
+                            {% for copy in city_list %}
+                            <option value="{{ copy.name }}">{{ copy.name }}</option>
+                            {% endfor %}
+                        </select></td>
+                    <td class="u-border-2 u-border-palette-4-base u-table-cell"><button type="submit" class="search-bar-cell">Поиск</button></td>
+                </tr>
+                </form>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<section class="u-clearfix u-section-2" id="sec-c4ab">
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-table u-table-responsive u-table-1">
+            <table class="u-table-entity">
+                <colgroup>
+                    <col width="33.3%">
+                    <col width="33.3%">
+                    <col width="33.39%">
+                </colgroup>
+
+                <tbody class="u-table-body">
+
+                <tr style="height: 321px;">
+                    {% for ad in ad_list %}
+                        {% if forloop.counter|divisibleby:"4" %}
+                        <tr style="height: 321px;">
+                        {% endif %}
+                    <td class="u-table-cell">
+                        <img class="u-border-2 u-border-grey-75 u-image u-image-default cell"
+                             {% if ad.img %}
+             src="{{ MEDIA_URL }}{{ ad.img.url }}" alt="" data-image-width="100" data-image-height="100">
+                        {% endif %}
+        <p class="u-align-left u-text">
+            <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"
+               href="{{ ad.get_absolute_url }}"> {{ ad.name }} </a>
+        </p>
+        <p class="u-align-left u-text">{{ ad.price }}</p>
+        <p class="u-align-left u-text">{{ ad.city }}</p>
+        <p class="u-align-left u-text">{{ ad.date_of_creation }}</p>
+                    </td>
+                        {% if forloop.counter|divisibleby:"3" %}
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+
+                <tr style="height: 300px;">
+                    <td class="u-table-cell"></td>
+                    <td class="u-table-cell"></td>
+                    <td class="u-table-cell"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+
+
+<footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-d535">
+    <div class="u-clearfix u-sheet u-sheet-1"></div>
+</footer>
+
+<style>
+    .cell {
+        height: 200px;
+        width: 250px;
+    }
+
+    .logo{
+        height: 150%;
+    }
+
+    .search-bar-cell{
+        height: 100%;
+        width: 100%;
+    }
+    input::placeholder {
+  color: grey;
+  font-style: italic;
+}
+</style>
+
+{% endblock %}

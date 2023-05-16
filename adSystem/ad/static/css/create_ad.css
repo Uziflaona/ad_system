@@ -1,0 +1,61 @@
+.u-section-1 .u-sheet-1 {
+  min-height: 1271px;
+}
+
+.u-section-1 .u-table-1 {
+  width: 816px;
+  margin: 0 auto 0 0;
+}
+
+.u-block-4701-14 {
+  height: 47px;
+}
+
+.u-section-1 .u-table-cell-1 {
+  font-size: 1.5rem;
+}
+
+.u-block-4701-25 {
+  height: 47px;
+}
+
+.u-section-1 .u-text-1 {
+  margin: 81px auto 0 0;
+}
+
+.u-section-1 .u-table-2 {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+
+.u-block-4701-35 {
+  height: 47px;
+}
+
+.u-block-4701-46 {
+  height: 47px;
+}
+
+.u-section-1 .u-btn-1 {
+  background-image: none;
+  margin: 30px auto 60px;
+  padding: 9px 83px 10px 81px;
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-table-1 {
+    width: 720px;
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-table-1 {
+    width: 540px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-table-1 {
+    width: 340px;
+  }
+}

@@ -1,0 +1,109 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+    <style>
+    .login_btn {
+        position: absolute;
+    top: 50px;
+    right: 30px;
+    </style>
+    <style>
+    .profile_btn {
+        position: absolute;
+    top: 50px;
+    right: 150px;
+    }
+    .logo{
+        height: 150%;
+    }
+    .image {
+            height: 400px;
+    }
+    .cell {
+        height: 200px;
+        width: 250px;
+    }
+    </style>
+    <header class="u-clearfix u-header u-header" id="sec-7abc">
+    {% if user.is_authenticated %}
+         <a href="{% url 'profile' %}"
+               class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2 profile_btn">Профиль</a>
+        <a href="{% url 'logout' %}"
+               class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2 login_btn">Выход</a>
+            {% else %}
+        <a href="{% url 'login' %}"
+               class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2 login_btn">Вход</a>
+        <a href="{% url 'register' %}"
+               class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2 profile_btn">Регистрация</a>
+            {% endif %}
+    <div class="u-clearfix u-sheet u-sheet-1">
+            <a href="/" class="">
+                <img src="/media/kit%20logo.png" class="logo">
+            </a>
+
+            <nav class="u-menu u-menu-one-level u-offcanvas u-menu-1">
+                <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+                    <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                       href="#">
+
+                        <svg class="u-svg-link" viewBox="0 0 24 24">
+                            <use xlink:href="#menu-hamburger"></use>
+                        </svg>
+                        <svg class="u-svg-content" version="1.1" id="menu-hamburger" viewBox="0 0 16 16" x="0px" y="0px"
+                             xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+                            <g>
+                                <rect y="1" width="16" height="2"></rect>
+                                <rect y="7" width="16" height="2"></rect>
+                                <rect y="13" width="16" height="2"></rect>
+                            </g>
+                        </svg>
+                    </a>
+                </div>
+                <div class="u-custom-menu u-nav-container">
+                    <ul class="u-nav u-unstyled u-nav-1">
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                                href="/" style="padding: 10px 20px;">Главная</a>
+                        </li>
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                                href="#" style="padding: 10px 20px;">О нас</a>
+                        </li>
+                        <li class="u-nav-item"><a
+                                class="u-button-style u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base"
+                                href="#" style="padding: 10px 20px;">Контакты</a>
+                        </li>
+                        <li class="u-nav-item">
+    <a href="/ad/newad"
+   class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-1 u-custom-right-menu-spacing">Новое объявление</a>
+</li>
+                    </ul>
+
+
+                </div>
+                <div class="u-custom-menu u-nav-container-collapse">
+                    <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+                        <div class="u-inner-container-layout u-sidenav-overflow">
+                            <div class="u-menu-close"></div>
+                            <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Главная</a>
+                                </li>
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">О нас</a>
+                                </li>
+                                <li class="u-nav-item"><a class="u-button-style u-nav-link" href="#">Контакты</a>
+                                </li>
+                                <li class="u-nav-item">
+    <a href="/ad/newad"
+   class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-1 u-custom-right-menu-spacing">Новое объявление</a>
+</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+                </div>
+
+            </nav>
+        </div>
+    </header>
+{% block body %} {% endblock %}
+{% endblock %}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="ru">
+
+<head>
+    {% block title %} <title>Объявления</title> {% endblock %}
+
+<body>
+{#    <meta name="generator" content="Nicepage 5.9.8, nicepage.com">#}
+{% block content %}{% endblock %}
+
+{% block pagination %}
+    {% if is_paginated %}
+
+        <div class="pagination">
+          <span class="page-links">
+              {% if page_obj.has_previous %}
+                  <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">пред.</a>
+              {% endif %}
+              <span class="page-current">
+                  Стр. {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}
+              </span>
+              {% if page_obj.has_next %}
+                  <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">след.</a>
+              {% endif %}
+          </span>
+        </div>
+    {% endif %}
+{% endblock %}
+
+</body>
+</html>

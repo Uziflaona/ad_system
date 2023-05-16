@@ -1,0 +1,197 @@
+{% extends "base_header.html" %}
+
+
+
+{% block body %}
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8">
+        <meta name="keywords" content="">
+        <meta name="description" content="">
+        {% block title %}
+            <title>Объявление</title>
+        {% endblock %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
+        <link rel="stylesheet" href="{% static 'css/ad_detail.css' %}" media="screen">
+        <script class="u-script" type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}" defer=""></script>
+        <script class="u-script" type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" defer=""></script>
+        <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
+        <link id="u-theme-google-font" rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+
+        <meta name="theme-color" content="#478ac9">
+        <meta property="og:title" content="ad_detail">
+        <meta property="og:type" content="website">
+        <meta data-intl-tel-input-cdn-path="intlTelInput/">
+    </head>
+    <body class="u-body u-xl-mode" data-lang="ru">
+
+    <section class="u-clearfix u-section-1" id="sec-a1c0">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <p class="u-text u-text-default u-text-1">Категория: {{ ad.type }}</p>
+
+            <div class="u-expanded-width u-table u-table-responsive">
+                <table class="u-table-entity">
+                    <colgroup>
+                        <col width="57.1%">
+                        <col width="42.9%">
+                    </colgroup>
+                    <tbody class="u-table-body">
+                    <tr style="height: 83px;">
+                        <td class="u-table-cell u-table-cell-1">{{ ad.name }}</td>
+                        <td class="u-table-cell">
+                            <p class="u-text">Цена:</p>
+                            <p class="u-text">{{ ad.price }}</p>
+{#                            <p class="u-text u-text-default">#}
+{#                                <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"#}
+{#                                   href="/">Предложить свою цену</a>#}
+{#                            </p>#}
+                        </td>
+                    </tr>
+                    <tr style="height: 450px;">
+                        <td class="u-table-cell">{% if ad.img %}
+                            <img class="u-border-2 u-border-grey-75 u-image u-image-default image"
+                                                      src="{{ ad.img.url }}" alt="" data-image-width="1200"
+                                                      data-image-height="693">
+                            {% endif %}
+                        </td>
+                        <td class="u-table-cell">
+                            {% if user.is_authenticated %}
+                        <button type="button" class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2" data-toggle="modal" data-target="#myModal">Показать
+                            телефон</button></td>
+                        {% else %}
+                                                <a href="{% url 'login' %}"
+                                                    class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Показать
+                            телефон</a>
+                    {% endif %}
+                    </tr>
+                    <tr style="height: 92px;">
+                        <td class="u-table-cell u-table-valign-top u-table-cell-5">Адрес:
+                            {% if ad.city.region %}
+                            {{ ad.city.region }}
+                            {% endif %}
+                            {% if ad.city %}
+                            г. {{ ad.city }}
+                            {% endif %}
+                            {% if ad.street %}
+                            ул. {{ ad.street }}
+                            {% endif %}
+                            {% if ad.house %}
+                            {{ ad.house }}
+                            {% endif %}
+                            <br>
+                        </td>
+                        <td class="u-table-cell"></td>
+                    </tr>
+                    <tr style="height: 231px;">
+                        <td class="u-table-cell u-table-valign-top u-table-cell-7">Описание:
+                        <p class="my-description">{{ ad.description }}</p>
+                        </td>
+                        <td class="u-table-cell"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="u-text u-text-default">Создано:&nbsp;{{ ad.date_of_creation }}</p>
+        </div>
+{% if is_owner %}
+    <a href="delete"
+       class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Удалить объявление</a>
+    {% endif %}
+    </section>
+    <section class="u-clearfix u-section-2" id="sec-6153">
+    {% if ad_list %}
+        <div class="u-clearfix u-sheet u-sheet-1">
+
+        <div class="t">Похожие объявления</div>
+            <div class="u-table u-table-responsive u-table-1">
+                <table class="u-table-entity">
+                <colgroup>
+                    <col width="33.3%">
+                    <col width="33.3%">
+                    <col width="33.39%">
+                </colgroup>
+
+                <tbody class="u-table-body">
+
+                <tr style="height: 321px;">
+                    {% for copy in ad_list %}
+                        {% if forloop.counter|divisibleby:"4" %}
+                        <tr style="height: 321px;">
+                        {% endif %}
+                    <td class="u-table-cell">
+                        <img class="u-border-2 u-border-grey-75 u-image u-image-default cell"
+             src="{{ MEDIA_URL }}{{ copy.img.url }}" alt="" data-image-width="100" data-image-height="100">
+        <p class="u-align-left u-text">
+            <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"
+               href="{{ copy.get_absolute_url }}"> {{ copy.name }} </a>
+        </p>
+        <p class="u-align-left u-text">{{ copy.price }}</p>
+        <p class="u-align-left u-text">{{ copy.city }}</p>
+        <p class="u-align-left u-text">{{ copy.date_of_creation }}</p>
+                    </td>
+                        {% if forloop.counter|divisibleby:"4" %}
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+            </div>
+
+        </div>
+    {% endif %}
+    </section>
+
+
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-d535">
+        <div class="u-clearfix u-sheet u-sheet-1"></div>
+    </footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+
+    </section>
+   <!-- Модальное оконо -->
+    {% if user.is_authenticated %}
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Содержимое модального окна -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Номер телефона и почта для связи</h4>
+      </div>
+      <div class="modal-body">
+        <p>Номер телефона: {{ ad.owner.phone_number }}</p>
+          <p>Почта: {{ ad.owner.user.email }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endif %}
+
+
+    <style>
+        .image {
+            height: 400px;
+            max-width: 700px;
+        }
+        .cell {
+            height: 200px;
+            width: 250px;
+        }
+        .t {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+        .my-description{
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+    </style>
+{% endblock %}

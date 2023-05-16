@@ -1,0 +1,54 @@
+{% extends 'base_header.html' %}
+
+{% block body %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'css/Главная.css' %}" media="screen">
+    <script class="u-script" type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}" defer=""></script>
+    <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
+<body>
+
+<section class="u-clearfix u-section-2" id="sec-c4ab">
+    <div class="u-clearfix u-sheet u-sheet-1">
+    <p class="u-align-center">Ваши объявления</p>
+        <div class="u-table u-table-responsive u-table-1">
+            <table class="u-table-entity">
+                <colgroup>
+                    <col width="33.3%">
+                    <col width="33.3%">
+                    <col width="33.39%">
+                </colgroup>
+
+                <tbody class="u-table-body">
+
+                <tr style="height: 321px;">
+                    {% for ad in ad_list %}
+                        {% if forloop.counter|divisibleby:"4" %}
+                        <tr style="height: 321px;">
+                        {% endif %}
+                    <td class="u-table-cell">
+                        <img class="u-border-2 u-border-grey-75 u-image u-image-default cell"
+                             {% if ad.img %}
+             src="{{ MEDIA_URL }}{{ ad.img.url }}" alt="" data-image-width="100" data-image-height="100">
+                        {% endif %}
+        <p class="u-align-left u-text">
+            <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"
+               href="{{ ad.get_absolute_url }}"> {{ ad.name }} </a>
+        </p>
+        <p class="u-align-left u-text">{{ ad.price }}</p>
+        <p class="u-align-left u-text">{{ ad.city }}</p>
+        <p class="u-align-left u-text">{{ ad.date_of_creation }}</p>
+                    </td>
+                        {% if forloop.counter|divisibleby:"4" %}
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</section>
+</body>
+{% endblock %}
