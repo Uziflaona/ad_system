@@ -54,6 +54,14 @@ class City(models.Model):
     def __str__(self):
         return self.name;
 
+class Offer(models.Model):
+    ad_owner = models.ForeignKey('Individual', on_delete=models.CASCADE)
+    customer = models.ForeignKey('Individual', on_delete=models.CASCADE)
+    ad = models.ForeignKey('Ad', on_delete=models.CASCADE)
+    new_price = models.IntegerField(blank=True, null=True, help_text='Предложение новой цены')
+    description = models.TextField(max_length=200, blank=True, null=True, help_text='Описание предложения')
+
+
 
 class Street(models.Model):
     name = models.CharField(max_length=100, help_text='Название улицы')
