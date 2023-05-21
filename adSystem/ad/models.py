@@ -4,12 +4,14 @@ import os
 
 import datetime
 
+
 def get_image_filename(instance, filename):
     """Функция для генерации уникального имени файла изображения с датой"""
     ext = filename.split('.')[-1]  # определяем расширение файла изображения
     now = datetime.datetime.now()  # получаем текущую дату и время
     filename = f'{now.strftime("%Y-%m-%d %H:%M:%S")}.{ext}'  # создаем уникальное имя файла с датой и расширением
     return os.path.join('images/', filename)  # возвращаем имя файла
+
 
 class Ad(models.Model):
     id = models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')
@@ -30,17 +32,20 @@ class Ad(models.Model):
     def __str__(self):
         return self.name;
 
+
 class Type(models.Model):
     name = models.CharField(max_length=100, help_text='Название типа')
 
     def __str__(self):
         return self.name;
 
+
 class Region(models.Model):
     name = models.CharField(max_length=100, help_text='Имя региона')
 
     def __str__(self):
         return self.name;
+
 
 class City(models.Model):
     name = models.CharField(max_length=100, help_text='Название города')
@@ -49,11 +54,13 @@ class City(models.Model):
     def __str__(self):
         return self.name;
 
+
 class Street(models.Model):
     name = models.CharField(max_length=100, help_text='Название улицы')
 
     def __str__(self):
         return self.name;
+
 
 class Individual(models.Model):
     name = models.CharField(max_length=200, help_text="Фио ползьователя")
@@ -66,4 +73,3 @@ class Individual(models.Model):
 
     def __str__(self):
         return self.name;
-

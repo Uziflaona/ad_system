@@ -25,7 +25,8 @@ class adListView(generic.ListView):
         city = self.request.GET.get("city")
         if query or type or city:
             object_list = Ad.objects.filter(
-                Q(name__icontains=query, description__icontains = query, city__name__icontains=city, type__name__icontains=type)
+                Q(name__icontains=query, city__name__icontains=city, type__name__icontains=type) |
+                Q(description__icontains=query, city__name__icontains=city, type__name__icontains=type)
             )
         else:
             object_list = Ad.objects.all()

@@ -34,15 +34,16 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Uziflaona/Documents/Project/ad_system/adSystem/ad/templates/ad"
+    "last_opened_file_path": "C:/Users/Uziflaona/Documents/Project/ad_system/adSystem/media"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\media" />
+      <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\static\js" />
       <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\templates\ad" />
       <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\templates\registration" />
       <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\static\templates" />
-      <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\static\css" />
@@ -87,6 +88,11 @@
       <updated>1683991240577</updated>
       <workItem from="1683991241829" duration="45045000" />
       <workItem from="1684157940265" duration="28067000" />
+      <workItem from="1684256031677" duration="12789000" />
+      <workItem from="1684405399135" duration="610000" />
+      <workItem from="1684556164791" duration="1444000" />
+      <workItem from="1684557792919" duration="618000" />
+      <workItem from="1684564325554" duration="3820000" />
     </task>
     <servers />
   </component>
