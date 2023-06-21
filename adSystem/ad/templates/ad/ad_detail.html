@@ -1,31 +1,10 @@
 {% extends "base_header.html" %}
 
 
-
 {% block body %}
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="utf-8">
-        <meta name="keywords" content="">
-        <meta name="description" content="">
-        {% block title %}
-            <title>Объявление</title>
-        {% endblock %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        {% load static %}
-        <link rel="stylesheet" href="{% static 'css/nicepage.css' %}" media="screen">
-        <link rel="stylesheet" href="{% static 'css/ad_detail.css' %}" media="screen">
-        <script class="u-script" type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}" defer=""></script>
-        <script class="u-script" type="text/javascript" src="{% static 'js/bootstrap.min.js' %}" defer=""></script>
-        <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
-        <link id="u-theme-google-font" rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/ad_detail.css' %}" media="screen">
 
-        <meta name="theme-color" content="#478ac9">
-        <meta property="og:title" content="ad_detail">
-        <meta property="og:type" content="website">
-        <meta data-intl-tel-input-cdn-path="intlTelInput/">
-    </head>
     <body class="u-body u-xl-mode" data-lang="ru">
 
     <section class="u-clearfix u-section-1" id="sec-a1c0">
@@ -59,12 +38,17 @@
                         </td>
                         <td class="u-table-cell">
                             {% if user.is_authenticated %}
-                        <button type="button" class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2" data-toggle="modal" data-target="#myModal">Показать
-                            телефон</button></td>
+                        <button type="button" class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2" data-toggle="modal" data-target="#contact">Показать
+                            телефон</button>
+                                {% if not is_owner %}
+                                 <button type="button" class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2" data-toggle="modal" data-target="#offer">Предлжить свою цену</button></td>
+                                {% endif %}
                         {% else %}
                                                 <a href="{% url 'login' %}"
                                                     class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Показать
                             телефон</a>
+                                <a href="{% url 'login' %}"
+                                                    class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Предложить свою цену</a>
                     {% endif %}
                     </tr>
                     <tr style="height: 92px;">
@@ -97,6 +81,9 @@
             <p class="u-text u-text-default">Создано:&nbsp;{{ ad.date_of_creation }}</p>
         </div>
 {% if is_owner %}
+    <a href="{% url 'edit-ad' pk=ad.id %}"
+       class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Изменить объявление</a>
+
     <a href="delete"
        class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Удалить объявление</a>
     {% endif %}
@@ -122,8 +109,10 @@
                         <tr style="height: 321px;">
                         {% endif %}
                     <td class="u-table-cell">
+                    {% if ad.img %}
                         <img class="u-border-2 u-border-grey-75 u-image u-image-default cell"
              src="{{ MEDIA_URL }}{{ copy.img.url }}" alt="" data-image-width="100" data-image-height="100">
+                        {% endif %}
         <p class="u-align-left u-text">
             <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"
                href="{{ copy.get_absolute_url }}"> {{ copy.name }} </a>
@@ -154,7 +143,7 @@
     </section>
    <!-- Модальное оконо -->
     {% if user.is_authenticated %}
-<div id="myModal" class="modal fade" role="dialog">
+<div id="contact" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Содержимое модального окна -->
@@ -165,6 +154,31 @@
       <div class="modal-body">
         <p>Номер телефона: {{ ad.owner.phone_number }}</p>
           <p>Почта: {{ ad.owner.user.email }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="offer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Содержимое модального окна -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Предложить цену</h4>
+      </div>
+      <div class="modal-body">
+          <form action="{% url 'create-offer' %}" method="post">
+              {% csrf_token %}
+          {{ offer_form.as_p }}
+              <input type="hidden" name="ad_id" value="{{ ad.id }}">
+              <input class="u-align-left u-form-group u-form-submit u-border-none u-btn u-btn-round u-button-style
+            u-palette-4-base u-radius-20 u-btn-1 u-btn u-btn-submit u-button-style u-btn-1" value="Предложить"
+                       type="submit">
+              </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>

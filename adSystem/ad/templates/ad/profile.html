@@ -6,49 +6,300 @@
     <link rel="stylesheet" href="{% static 'css/Главная.css' %}" media="screen">
     <script class="u-script" type="text/javascript" src="{% static 'js/jquery-1.9.1.min.js' %}" defer=""></script>
     <script class="u-script" type="text/javascript" src="{% static 'js/nicepage.js' %}" defer=""></script>
-<body>
+    <body>
 
-<section class="u-clearfix u-section-2" id="sec-c4ab">
-    <div class="u-clearfix u-sheet u-sheet-1">
-    <p class="u-align-center">Ваши объявления</p>
-        <div class="u-table u-table-responsive u-table-1">
-            <table class="u-table-entity">
-                <colgroup>
-                    <col width="33.3%">
-                    <col width="33.3%">
-                    <col width="33.39%">
-                </colgroup>
+    <section class="u-clearfix u-section-2" id="sec-c4ab">
 
-                <tbody class="u-table-body">
+        <div class="tabs">
+            <ul class="tab-links">
+                <li class="{% if tab == '1' %} active {% endif %}"><a href="#tab1">Ваши объявления</a></li>
+                <li class="{% if tab == '2' %} active {% endif %}"><a href="#tab2">Предложения</a></li>
+                <li class="{% if tab == '3' %} active {% endif %}"><a href="#tab3">Изменить данные профиля</a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="tab1" class="tab {% if tab == '1' %} active {% endif %}">
+                    <div class="u-clearfix u-sheet u-sheet-1">
+                        <p class="u-align-center">Ваши объявления</p>
+                        <div class="u-table u-table-responsive u-table-1">
+                            <table class="u-table-entity">
+                                <colgroup>
+                                    <col width="33.3%">
+                                    <col width="33.3%">
+                                    <col width="33.39%">
+                                </colgroup>
 
-                <tr style="height: 321px;">
-                    {% for ad in ad_list %}
-                        {% if forloop.counter|divisibleby:"4" %}
-                        <tr style="height: 321px;">
-                        {% endif %}
-                    <td class="u-table-cell">
-                        <img class="u-border-2 u-border-grey-75 u-image u-image-default cell"
-                             {% if ad.img %}
-             src="{{ MEDIA_URL }}{{ ad.img.url }}" alt="" data-image-width="100" data-image-height="100">
-                        {% endif %}
-        <p class="u-align-left u-text">
-            <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"
-               href="{{ ad.get_absolute_url }}"> {{ ad.name }} </a>
-        </p>
-        <p class="u-align-left u-text">{{ ad.price }}</p>
-        <p class="u-align-left u-text">{{ ad.city }}</p>
-        <p class="u-align-left u-text">{{ ad.date_of_creation }}</p>
-                    </td>
-                        {% if forloop.counter|divisibleby:"4" %}
-                        </tr>
-                        {% endif %}
-                    {% endfor %}
-                </tr>
-                </tbody>
-            </table>
+                                <tbody class="u-table-body">
+
+                                <tr style="height: 321px;">
+                                    {% for ad in ad_list %}
+                                        {% if forloop.counter|divisibleby:"4" %}
+                                            <tr style="height: 321px;">
+                                        {% endif %}
+                                    <td class="u-table-cell">
+                                        <img class="u-border-2 u-border-grey-75 u-image u-image-default cell"
+                                                {% if ad.img %}
+                                             src="{{ MEDIA_URL }}{{ ad.img.url }}" alt="" data-image-width="100"
+                                             data-image-height="100">
+                                                {% endif %}
+                                        <p class="u-align-left u-text">
+                                            <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"
+                                               href="{{ ad.get_absolute_url }}"> {{ ad.name }} </a>
+                                        </p>
+                                        <p class="u-align-left u-text">{{ ad.price }} ₽</p>
+                                        <p class="u-align-left u-text">{{ ad.city }}</p>
+                                        <p class="u-align-left u-text">{{ ad.date_of_creation }}</p>
+                                        <a href="{% url 'edit-ad' pk=ad.id %}"
+                                           class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Изменить
+                                            объявление</a>
+                                        <a href="{% url 'delete_ad' pk=ad.id %}?rdr={% url 'profile' %}"
+                                           class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Удалить
+                                            объявление</a>
+                                    </td>
+                                    {% if forloop.counter|divisibleby:"4" %}
+                                        </tr>
+                                    {% endif %}
+                                    {% endfor %}
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="tab2" class="tab {% if tab == '2' %} active {% endif %}">
+
+                    {% if ad_offers %}
+                        {% for ad_offer in ad_offers %}
+                            <hr>
+                            <div class="u-clearfix u-sheet u-sheet-3">
+                            <div class="u-expanded-width u-table u-table-responsive u-table-3">
+                                <table class="u-table-entity">
+                                    <colgroup>
+                                        <col width="25.6%">
+                                        <col width="24.4%">
+                                        <col width="25%">
+                                        <col width="25%">
+                                    </colgroup>
+                                    <tbody class="u-table-body">
+                                    <tr style="height: 192px;">
+                                        <td class="u-border-5 u-border-palette-4-base u-table-cell"><img
+                                                class="u-border-2 u-border-grey-75 u-image u-image-default cell"
+                                                src="{{ MEDIA_URL }}{{ ad_offer.0.ad.img.url }}" alt=""
+                                                data-image-width="100" data-image-height="100">
+                                        </td>
+                                        <td class="u-align-center u-border-5 u-border-palette-4-base u-table-cell"><a
+                                                href="{% url 'ad-detail' pk=ad_offer.0.ad.id %}">{{ ad_offer.0.ad.name }}</a>
+                                        </td>
+                                        <td class="u-align-center u-border-5 u-border-palette-4-base u-table-cell u-table-valign-middle">
+                                            {{ ad_offer.0.ad.price }} ₽
+                                        </td>
+                                        <td class="u-align-center u-border-5 u-border-palette-4-base u-table-cell">{{ ad_offer.0.ad.date_of_creation }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="u-expanded-width u-table u-table-responsive u-table-4">
+                                <table class="u-table-entity">
+                                    <colgroup>
+                                        <col width="26.4%">
+                                        <col width="40.1%">
+                                        <col width="19.5%">
+                                        <col width="14%">
+                                    </colgroup>
+                                    <thead class="u-palette-4-base u-table-header u-table-header-2">
+                                    <tr style="height: 47px;">
+                                        <th class="u-align-center u-border-1 u-border-grey-dark-1 u-table-cell">Автор
+                                        </th>
+                                        <th class="u-align-center u-border-1 u-border-grey-dark-1 u-table-cell">
+                                            Описание
+                                        </th>
+                                        <th class="u-align-center u-border-1 u-border-grey-dark-1 u-table-cell">Новая
+                                            цена
+                                        </th>
+                                        <th class="u-align-center u-border-1 u-border-grey-dark-1 u-table-cell"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="u-table-body">
+                                    {% for offer in ad_offer.0.offer_list %}
+                                        <tr style="height: 86px;">
+                                            <td class="u-border-1 u-border-grey-dark-1 u-table-cell u-align-center u-cell-text">{{ offer.customer.individual.name }}</td>
+                                            <td class="u-border-1 u-border-grey-dark-1 u-table-cell u-align-center">{{ offer.description }}</td>
+                                            <td class="u-border-1 u-border-grey-dark-1 u-table-cell u-align-center u-cell-text">{{ offer.new_price }}
+                                                ₽
+                                            </td>
+                                            <td class="u-border-1 u-border-grey-dark-1 u-table-cell u-align-center"><button type="button" class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2" data-toggle="modal" data-target="#contact{{ offer.id }}">Показать
+                            телефон</button>
+                                                <form action="{% url 'delete-offer'%}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="offer_id" value="{{ offer.id }}">
+                                            <button type="submit"
+                                                    class="u-border-none u-btn u-btn-round u-button-style u-palette-4-base u-radius-20 u-btn-2">Удалить предложение</button>
+                                            </form>
+                                            </td>
+                                        </tr>
+<div id="contact{{ offer.id }}" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Содержимое модального окна -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Номер телефона и почта для связи</h4>
+      </div>
+      <div class="modal-body">
+        <p>Номер телефона: {{ offer.customer.individual.phone_number }}</p>
+          <p>Почта: {{ offer.customer.email }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div id="offer" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+</div>
+                            {#    TODO: complete offer#}
+                        {% endfor %}
+                    {% endif %}
+
+
+                </div>
+                <div id="tab3" class="tab {% if tab == '3' %} active {% endif %}">
+                    <form action="{% url 'edit-user' %}" method="POST">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <input class="u-align-left u-form-group u-form-submit u-border-none u-btn u-btn-round u-button-style
+            u-palette-4-base u-radius-20 u-btn u-btn-submit u-button-style u-btn-2" value="Изменить"
+                               type="submit">
+                    </form>
+                </div>
+            </div>
         </div>
 
-    </div>
-</section>
-</body>
+
+    </section>
+
+    <script type="text/javascript">
+        const tabLinks = document.querySelectorAll('.tab-links a');
+        const tabContent = document.querySelectorAll('.tab-content .tab');
+
+        tabLinks.forEach(link => {
+            link.addEventListener('click', event => {
+                event.preventDefault();
+                // Удаляем класс "active" у активной вкладки и ее содержимого
+                document.querySelector('.tab-links .active').classList.remove('active');
+                document.querySelector('.tab-content .active').classList.remove('active');
+                // Добавляем класс "active" к кликнутой вкладке и ее содержимому
+                const clickedTab = event.target;
+                const targetTab = document.querySelector(clickedTab.hash);
+                clickedTab.parentNode.classList.add('active');
+                targetTab.classList.add('active');
+            });
+        });
+    </script>
+
+    <style>
+        .tabs {
+            width: 100%;
+            display: inline-block;
+        }
+
+        .tab-links:after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+
+        .tab-links li {
+            margin: 0px 5px;
+            float: left;
+            list-style: none;
+        }
+
+        .tab-links a {
+            padding: 9px 15px;
+            display: inline-block;
+            border-radius: 3px 3px 0px 0px;
+            background: #2cccc4;
+            font-size: 16px;
+            font-weight: 600;
+            color: #FFF;
+            transition: all linear 0.15s;
+        }
+
+        .tab-links a:hover {
+            background: #a7cce5;
+            text-decoration: none;
+        }
+
+        li.active a, li.active a:hover {
+            background: #FFF;
+            color: #333;
+        }
+
+        .tab-content {
+            padding: 15px;
+            border-radius: 3px;
+            box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15);
+            background: #FFF;
+        }
+
+        .tab {
+            display: none;
+        }
+
+        .tab.active {
+            display: block;
+        }
+
+        .u-sheet-3 {
+            min-height: 400px;
+        }
+
+        .u-table-3 {
+            margin-bottom: 0;
+            margin-top: 30px;
+        }
+
+        .u-block-bc40-10 {
+            height: 47px;
+        }
+
+        .u-block-bc40-33 {
+            height: 47px;
+        }
+
+        .u-cell-text{
+            font-size: 24px;
+        }
+
+        .u-table-4 {
+            margin-top: 19px;
+            margin-bottom: 20px;
+        }
+
+        .u-table-header-2 {
+            background-image: none;
+        }
+
+        .u-block-bc40-56 {
+            height: 47px;
+        }
+        hr {
+            border: none; /* убираем стандартную рамку */
+            height: 2px; /* задаем высоту полосы */
+            background-color: #2cccc4; /* выбираем цвет фона */
+            margin: 20px 0; /* задаем отступы сверху и снизу */
+}
+    </style>
+
+    </body>
+
 {% endblock %}

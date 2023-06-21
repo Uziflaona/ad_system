@@ -20,7 +20,8 @@ urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/register/', register_view, name='register'),
     path('accounts/logout/', logout_view, name='logout'),
-    path('accounts/profile/', profileView, name='profile')
+    path('accounts/profile/', profileView, name='profile'),
+    path('accounts/profile/<int:tab>/', profileView, name='profile-tab'),
 ]
 
 #TODO: remove that code

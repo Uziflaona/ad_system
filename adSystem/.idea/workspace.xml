@@ -7,12 +7,15 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="DjangoConsoleOptions" custom-start-script="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)">
+    <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="JavaScript File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -28,20 +31,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/Uziflaona/Documents/Project/ad_system/adSystem/media"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Uziflaona/Documents/Project/ad_system/adSystem/ad/templates/ad&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\templates\ad" />
       <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\media" />
       <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\static\js" />
-      <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\templates\ad" />
       <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\templates\registration" />
       <recent name="C:\Users\Uziflaona\Documents\Project\ad_system\adSystem\ad\static\templates" />
     </key>
@@ -92,7 +96,12 @@
       <workItem from="1684405399135" duration="610000" />
       <workItem from="1684556164791" duration="1444000" />
       <workItem from="1684557792919" duration="618000" />
-      <workItem from="1684564325554" duration="4343000" />
+      <workItem from="1684564325554" duration="6443000" />
+      <workItem from="1685025638048" duration="603000" />
+      <workItem from="1685684707373" duration="10824000" />
+      <workItem from="1685859077697" duration="32799000" />
+      <workItem from="1686820725318" duration="1730000" />
+      <workItem from="1687232061571" duration="607000" />
     </task>
     <servers />
   </component>

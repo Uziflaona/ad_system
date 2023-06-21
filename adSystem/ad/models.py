@@ -55,11 +55,10 @@ class City(models.Model):
         return self.name;
 
 class Offer(models.Model):
-    customer = models.ForeignKey('Individual', on_delete=models.CASCADE)
+    customer = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     ad = models.ForeignKey('Ad', on_delete=models.CASCADE)
     new_price = models.IntegerField(blank=True, null=True, help_text='Предложение новой цены')
     description = models.TextField(max_length=200, blank=True, null=True, help_text='Описание предложения')
-
 
 
 class Street(models.Model):
@@ -72,7 +71,7 @@ class Street(models.Model):
 class Individual(models.Model):
     name = models.CharField(max_length=200, help_text="Фио ползьователя")
     avatar = models.ImageField(blank=True, null=True)
-    user = models.ForeignKey('auth.User', on_delete=models.DO_NOTHING)
+    user = models.OneToOneField('auth.User', on_delete=models.DO_NOTHING)
     phone_number = models.CharField(max_length=50, help_text="Номер телефона")
 
     def get_absolute_url(self):
